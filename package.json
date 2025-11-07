@@ -1,0 +1,41 @@
+{
+	"name": "@jsxtools/types-common",
+	"description": "A collection of common type definitions for cross-platform environments.",
+	"version": "0.1.0",
+	"type": "module",
+	"exports": {
+		".": "./common.d.ts"
+	},
+	"files": [
+		"common.d.ts",
+		"generate.js"
+	],
+	"author": "Jonathan Neal <jonathantneal@hotmail.com> (https://jonneal.dev)",
+	"license": "MIT-0",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jsxtools/types-common.git"
+	},
+	"homepage": "https://github.com/jsxtools/types-common#readme",
+	"scripts": {
+		"build": "npm run build:code; npm run build:post",
+		"build:code": "tsc --pretty && npm run postinstall",
+		"build:post": "biome lint --write common.d.ts && biome format --write common.d.ts",
+		"format": "biome format .",
+		"format:fix": "biome format --write .",
+		"lint": "biome lint .",
+		"lint:fix": "biome lint --write .",
+		"postinstall": "node generate.js",
+		"pretest": "npm run build:code && npm run lint:fix && npm run format:fix",
+		"test": "node tests/nodejs.test.js"
+	},
+	"peerDependencies": {
+		"@types/node": "*",
+		"typescript": "^5.4.5"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.2.6",
+		"@types/node": "^22.19.0",
+		"typescript": "^5.9.2"
+	}
+}
